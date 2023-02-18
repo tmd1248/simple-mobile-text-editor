@@ -16,9 +16,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+
+
 public class MainActivity extends AppCompatActivity {
     EditText userinput;
     String filename = "inputStorage";
+       /* This is intended to run at launch, and will load from memory the last known text from the file.
+    * It throws errors if the file does not exist or is otherwise unreachable.
+    * */
     public void loadText(Context context) {
         String savedText;
         try {
@@ -60,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void delete(View view) {
-
+ /* Attempts to overwrite the file with empty text, used to effectively delete it.
+ * useful for starting over.
+ * */
         String fileContents = "";
         try {
             FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
@@ -75,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
     }
+    /*Saves the input from the user into a persistent file for use later.
+    * */
         public void save(View view){
             String userText = userinput.getText().toString();
             try {
